@@ -1,8 +1,12 @@
-import React, { useMemo, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useSpring, a, config } from 'react-spring/three'
 
-const Mouth = () => {
+const Mouth = ({ activeSound }) => {
   const [active, setActive] = useState(false)
+
+  useEffect(() => {
+    changeMouth()
+  }, [activeSound])
 
   const animProps = useSpring({
     scale: active ? [1.1, 1.5, 1] : [1, 1, 1],

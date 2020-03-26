@@ -86,15 +86,7 @@ const Box = ({ mouse }) => {
           name={audioFiles[2].name}
         />
         <Eye x={2} y={2.2} mouse={mouse} />
-        <Mouth
-          start={[0.1, 0.2, 0.3]}
-          paths={[
-            [0.4, 0.34, 0.34, 0, 0, 0],
-            [0.4, 0.34, 1.34, 0, 0, 0],
-          ]}
-          amount={1}
-          bevelSize={0.001}
-        />
+        <Mouth activeSound={activeSound} />
         <Eye x={-2} y={2.2} mouse={mouse} />
       </group>
     </>
