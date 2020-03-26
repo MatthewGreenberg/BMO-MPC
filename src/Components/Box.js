@@ -11,7 +11,7 @@ import Trim from './Trim'
 import SwitchButton from './SwitchButton'
 import Eye from './Eye'
 import Mouth from './Mouth'
-const Box = props => {
+const Box = ({ mouse }) => {
   const [pads, setPads] = useState([])
   const [activeSwitch, setActiveSwitch] = useState(0)
   const [activeSound, setActiveSound] = useState(audioFiles[activeSwitch].name)
@@ -85,7 +85,7 @@ const Box = props => {
           setActiveSound={setActiveSound}
           name={audioFiles[2].name}
         />
-        <Eye x={2} y={2.2} />
+        <Eye x={2} y={2.2} mouse={mouse} />
         <Mouth
           start={[0.1, 0.2, 0.3]}
           paths={[
@@ -95,7 +95,7 @@ const Box = props => {
           amount={1}
           bevelSize={0.001}
         />
-        <Eye x={-2} y={2.2} />
+        <Eye x={-2} y={2.2} mouse={mouse} />
       </group>
     </>
   )
