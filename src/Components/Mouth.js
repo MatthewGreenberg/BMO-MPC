@@ -11,7 +11,7 @@ a.line2 = a('line2')
 a.lineMaterial = a('lineMaterial')
 
 const Mouth = ({ activeSound }) => {
-  const [width, setWidth] = useState(2)
+  const [width, setWidth] = useState(1.75)
   const [height, setHeight] = useState(0.5)
   const [active, setActive] = useState(true)
 
@@ -30,7 +30,7 @@ const Mouth = ({ activeSound }) => {
   const ref = useUpdate(geom => {
     const x1 = -width / 2
     const y = -height / 2
-    const radius = 0.15
+    const radius = 0.2
     const mouth = new Shape()
     mouth.moveTo(x1 - 0.1, y + radius)
     mouth.lineTo(x1 - 0.05, y + height - radius)
@@ -56,12 +56,12 @@ const Mouth = ({ activeSound }) => {
     <a.line2
       rotation={[0, 0, Math.PI]}
       scale={animProps.scale}
-      position={[0, 2, 2.3]}
+      position={[0, 2.3, 2.3]}
     >
       <lineGeometry attach="geometry" ref={ref} />
       <a.lineMaterial
         attach="material"
-        color={'black'}
+        color={'#333'}
         linewidth={10}
         resolution={[size.width, size.height]}
       />
