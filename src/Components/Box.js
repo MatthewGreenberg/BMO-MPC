@@ -9,7 +9,7 @@ import audioFiles from '../AudioFiles'
 import Text from './Text'
 import Trim from './Trim'
 import SwitchButton from './SwitchButton'
-import Eye from './Eye'
+import Eyes from './Eyes'
 import Mouth from './Mouth'
 const Box = ({ mouse }) => {
   const [pads, setPads] = useState([])
@@ -20,6 +20,24 @@ const Box = ({ mouse }) => {
   useEffect(() => {
     let i = 0
     let arr = []
+    const letters = [
+      'z',
+      'a',
+      'q',
+      '1',
+      'x',
+      's',
+      'w',
+      '2',
+      'c',
+      'd',
+      'e',
+      '3',
+      'v',
+      'f',
+      'r',
+      '4',
+    ]
     for (let x = -3.5; x <= 0.5; x += 1.3)
       for (let y = -4; y <= 0; y += 1.3) {
         arr.push(
@@ -31,6 +49,7 @@ const Box = ({ mouse }) => {
             audioFile={audioFiles[activeSwitch].sounds[i]}
             padToggle={padToggle}
             setPadToggle={setPadToggle}
+            letter={letters[i]}
           />
         )
         i++
@@ -88,9 +107,8 @@ const Box = ({ mouse }) => {
           setActiveSound={setActiveSound}
           name={audioFiles[2].name}
         />
-        <Eye x={1.75} y={3} mouse={mouse} />
-        <Mouth activeSound={activeSound} />
-        <Eye x={-1.75} y={3} mouse={mouse} />
+        {/* <Mouth activeSound={activeSound} /> */}
+        <Eyes x={-1.75} y={3} mouse={mouse} />
       </group>
     </>
   )

@@ -43,9 +43,7 @@ const Mouth = ({ activeSound }) => {
       y + height - radius
     )
     mouth.lineTo(x1 + width + 0.1, y + radius)
-    // mouth.quadraticCurveTo(x1 + width, y, x1 + width - radius, y)
-    // mouth.lineTo(x1 + radius, y)
-    // mouth.quadraticCurveTo(x1, y, x1, y + radius)
+
     const points = mouth
       .getPoints()
       .reduce((acc, { x, y }) => [...acc, x, y, 0], [], [])

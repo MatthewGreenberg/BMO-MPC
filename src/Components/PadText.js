@@ -3,8 +3,7 @@ import * as THREE from 'three'
 import { useLoader } from 'react-three-fiber'
 import { useSpring, a, config } from 'react-spring/three'
 
-const Text = ({ child }) => {
-  const [active, setActive] = useState(true)
+const PadText = ({ child, x, y, active }) => {
   const font = useLoader(
     THREE.FontLoader,
     process.env.PUBLIC_URL + 'MOONGET_Heavy.blob'
@@ -19,28 +18,28 @@ const Text = ({ child }) => {
     [font]
   )
 
-  useEffect(() => {
-    setActive(true)
-    setTimeout(() => setActive(false), 100)
-  }, [child])
-
   const animProps = useSpring({
-    position: active ? [-3.25, 1.37, 2.3] : [-3.5, 1.37, 2.3],
+    scale: active ? [0.8, 0.8, 0.8] : [1, 1, 1],
 
     config: config.default,
   })
 
   return (
-    <a.mesh frustumCulled={false} receiveShadow position={animProps.position}>
+    <a.mesh
+      frustumCulled={false}
+      receiveShadow
+      position={[x - 0.11, y - 0.1, 2.51]}
+      scale={animProps.scale}
+    >
       <textBufferGeometry attach="geometry" args={[child, config]} />
-      <a.meshToonMaterial
+      <meshPhongMaterial
         transparent={true}
-        opacity={1}
-        color="yellow"
+        opacity={0.5}
+        color="purple"
         attach="material"
       />
     </a.mesh>
   )
 }
 
-export default Text
+export default PadText

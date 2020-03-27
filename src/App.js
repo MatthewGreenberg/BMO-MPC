@@ -1,9 +1,10 @@
-import React, { useRef, useCallback, useState } from 'react'
+import React, { useRef, useCallback, useState, Suspense } from 'react'
 import './App.css'
 import { Canvas, Dom } from 'react-three-fiber'
 import Box from './Components/Box'
 import Controls from './Components/Controls'
 import Plane from './Components/Plane'
+import Effects from './Components/Effects'
 
 function App() {
   const mouse = useRef([300, -200])
@@ -48,6 +49,9 @@ function App() {
       <Plane />
 
       <Box mouse={mouse} />
+      <Suspense fallback={null}>
+        <Effects />
+      </Suspense>
     </Canvas>
   )
 }
