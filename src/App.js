@@ -20,6 +20,7 @@ function App() {
         position: [0, 0, 20],
         fov: 50,
       }}
+      gl={{ alpha: false, antialias: true, logarithmicDepthBuffer: false }}
     >
       <Controls />
       <spotLight
