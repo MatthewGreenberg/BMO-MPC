@@ -15,6 +15,7 @@ const Box = ({ mouse }) => {
   const [pads, setPads] = useState([])
   const [activeSwitch, setActiveSwitch] = useState(0)
   const [activeSound, setActiveSound] = useState(audioFiles[activeSwitch].name)
+  const [padToggle, setPadToggle] = useState(false)
 
   useEffect(() => {
     let i = 0
@@ -28,6 +29,8 @@ const Box = ({ mouse }) => {
             x={x}
             y={y}
             audioFile={audioFiles[activeSwitch].sounds[i]}
+            padToggle={padToggle}
+            setPadToggle={setPadToggle}
           />
         )
         i++
@@ -35,7 +38,7 @@ const Box = ({ mouse }) => {
     setPads(arr)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
+  console.log('pad toggle is:', padToggle)
   return (
     <>
       <group rotation={[-Math.PI / 7.5, 0, 0]}>

@@ -2,13 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react'
 import * as THREE from 'three'
 import { useSpring, a, config } from 'react-spring/three'
 
-const Pad = props => {
-  const { x, y, audioFile, setActiveSound } = props
+const Pad = ({ x, y, audioFile, setActiveSound, setPadToggle, padToggle }) => {
   const [sound, setSound] = useState(null)
   const [active, setActive] = useState(false)
   const animProps = useSpring({
     color: active ? 'hotpink' : 'purple',
-    planeColor: active ? 'black' : 'black',
+    planeColor: active ? 'pink' : 'white',
     scale: active ? [0.9, 0.9, 0.9] : [1, 1, 1],
     planeScale: active ? [0.8, 0.8, 0.8] : [1, 1, 1],
 
@@ -20,11 +19,12 @@ const Pad = props => {
     sound.stop()
     sound.play()
     setActiveSound(audioFile)
+    setPadToggle(!padToggle)
 
     setTimeout(function() {
       setActive(false)
     }, 200)
-  }, [audioFile, setActiveSound, sound])
+  }, [audioFile, padToggle, setActiveSound, setPadToggle, sound])
   useEffect(() => {
     let listener = new THREE.AudioListener()
     let sound = new THREE.Audio(listener)
@@ -34,7 +34,7 @@ const Pad = props => {
       sound.play()
       sound.stop()
 
-      sound.setVolume(1)
+      sound.setVolume(0.2)
     })
     setSound(sound)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,7 +58,7 @@ const Pad = props => {
           transparent={true}
           opacity={0.75}
           attach="material"
-          color={props.planeColor}
+          color={animProps.planeColor}
         />
       </a.mesh>
     </group>

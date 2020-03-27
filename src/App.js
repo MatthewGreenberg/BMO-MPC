@@ -16,7 +16,7 @@ function App() {
     <Canvas
       onMouseMove={onMouseMove}
       camera={{
-        position: [0, 0, 14],
+        position: [0, 0, 12],
       }}
     >
       <Controls />

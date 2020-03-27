@@ -25,7 +25,7 @@ const Text = ({ child }) => {
   }, [child])
 
   const animProps = useSpring({
-    position: active ? [-2.75, 1.35, 2.3] : [-3, 1.35, 2.3],
+    position: active ? [-3.25, 1.35, 2.3] : [-3.5, 1.35, 2.3],
 
     config: config.default,
   })
