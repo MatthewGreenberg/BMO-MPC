@@ -47,7 +47,7 @@ const Pad = ({
       sound.play()
       sound.stop()
 
-      sound.setVolume(0.2)
+      sound.setVolume(0.5)
     })
     setSound(sound)
     document.addEventListener('keydown', e => {

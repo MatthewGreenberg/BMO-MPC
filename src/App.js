@@ -17,7 +17,8 @@ function App() {
     <Canvas
       onMouseMove={onMouseMove}
       camera={{
-        position: [0, 0, 12],
+        position: [0, 0, 20],
+        fov: 50,
       }}
     >
       <Controls />
@@ -44,6 +45,13 @@ function App() {
         intensity={0.25}
         color="orange"
         position={[3, 0, 5]}
+      />
+      <pointLight
+        penumbra={1}
+        castShadow
+        intensity={0.35}
+        color="orange"
+        position={[-3, -1, 5]}
       />
 
       <Plane />

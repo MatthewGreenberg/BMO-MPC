@@ -68,7 +68,7 @@ const Box = ({ mouse }) => {
             specular={new THREE.Color('skyblue')}
             shininess={5}
             attach="material"
-            color="#222222"
+            color="teal"
           />
         </mesh>
         <group>{pads}</group>
