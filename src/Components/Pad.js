@@ -68,6 +68,9 @@ const Pad = ({
           onPointerDown={() => {
             setActivePad(sound)
           }}
+          onTouchStart={() => {
+            setActivePad(sound)
+          }}
           position={[x, y, 2]}
           scale={animProps.scale}
           recieveShadow
