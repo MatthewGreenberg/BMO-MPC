@@ -29,16 +29,16 @@ export default function Post() {
     const normalPass = new NormalPass(scene, camera)
     const ssaoEffect = new SSAOEffect(camera, normalPass.renderTarget.texture, {
       blendFunction: BlendFunction.SUBTRACT,
-      samples: 20,
+      samples: 10,
       rings: 2,
-      distanceThreshold: 4, // Render distance depends on camera near&far.
+      distanceThreshold: 1, // Render distance depends on camera near&far.
       distanceFalloff: 0, // No need for falloff.
       rangeThreshold: 0, // Larger value works better for this camera frustum.
       rangeFalloff: 0.1,
-      luminanceInfluence: 0.5,
-      radius: 4,
-      scale: 0.25,
-      bias: 0.3,
+      luminanceInfluence: 1,
+      radius: 30,
+      scale: 0.35,
+      bias: 0.5,
     })
     const effectPass = new EffectPass(camera, smaaEffect, ssaoEffect)
     effectPass.renderToScreen = true

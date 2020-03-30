@@ -40,13 +40,8 @@ function App() {
         camera={{
           position: [0, 0, 13],
         }}
-        gl={{ alpha: false, antialias: false }}
+        gl={{ antialias: false }}
         pixelRatio={window.devicePixelRatio}
-        onCreated={({ gl, scene }) => {
-          gl.toneMapping = THREE.ACESFilmicToneMapping
-          gl.outputEncoding = THREE.sRGBEncoding
-          // scene.background = new THREE.Color('#373740')
-        }}
       >
         >
         <Controls />
