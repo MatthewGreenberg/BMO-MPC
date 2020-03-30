@@ -8,24 +8,26 @@ const SwitchButton = ({
   setActiveSwitch,
   name,
   setActiveSound,
+  loadedSound,
 }) => {
   const animProps = useSpring({
     color: number === activeSwitch ? 'deeppink' : 'white',
-
-    config: config.default,
+    scale: number === activeSwitch ? [0.45, 0.25, 0.15] : [0.4, 0.2, 0.1],
+    config: config.wobbly,
   })
   return (
-    <mesh
-      onClick={() => {
+    <a.mesh
+      onPointerDown={() => {
         setActiveSwitch(number)
         setActiveSound(name)
+        loadedSound.play()
       }}
       position={position}
-      scale={[0.4, 0.2, 0.1]}
+      scale={animProps.scale}
     >
       <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
       <a.meshToonMaterial attach="material" color={animProps.color} />
-    </mesh>
+    </a.mesh>
   )
 }
 

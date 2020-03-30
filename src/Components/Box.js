@@ -8,9 +8,9 @@ import Dial from './Dial'
 import audioFiles from '../AudioFiles'
 import Text from './Text'
 import Trim from './Trim'
-import SwitchButton from './SwitchButton'
 import Eyes from './Eyes'
 import { useSpring, a, config } from 'react-spring/three'
+import SwitchButtons from './SwitchButtons'
 const Box = ({ mouse, setHover }) => {
   const [pads, setPads] = useState([])
   const [activeSwitch, setActiveSwitch] = useState(0)
@@ -64,7 +64,7 @@ const Box = ({ mouse, setHover }) => {
       }
     setPads(arr)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [activeSwitch])
   return (
     <>
       <a.group
@@ -95,29 +95,11 @@ const Box = ({ mouse, setHover }) => {
           scale={[0.3, 0.3, 0.3]}
         />
         <Trim position={[0, -4.85, 2.05]} />
-        <SwitchButton
-          activeSwitch={activeSwitch}
-          setActiveSwitch={setActiveSwitch}
-          number={0}
-          position={[2.3, 0, 2]}
+        <SwitchButtons
+          audioFiles={audioFiles}
           setActiveSound={setActiveSound}
-          name={audioFiles[0].name}
-        />
-        <SwitchButton
-          activeSwitch={activeSwitch}
           setActiveSwitch={setActiveSwitch}
-          number={1}
-          position={[3.0, 0, 2]}
-          setActiveSound={setActiveSound}
-          name={audioFiles[1].name}
-        />
-        <SwitchButton
           activeSwitch={activeSwitch}
-          setActiveSwitch={setActiveSwitch}
-          number={2}
-          position={[3.7, 0, 2]}
-          setActiveSound={setActiveSound}
-          name={audioFiles[2].name}
         />
         <Eyes x={-1.75} y={3} mouse={mouse} />
       </a.group>

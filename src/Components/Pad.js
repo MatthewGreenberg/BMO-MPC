@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback, Suspense } from 'react'
 import * as THREE from 'three'
 import { useSpring, a, config } from 'react-spring/three'
-import Text from './Text'
 import PadText from './PadText'
 
 const Pad = ({
@@ -12,11 +11,9 @@ const Pad = ({
   setPadToggle,
   padToggle,
   letter,
-  setHover,
 }) => {
   const [sound, setSound] = useState(null)
   const [active, setActive] = useState(false)
-  const [listener] = useState(() => new THREE.AudioListener())
   const animProps = useSpring({
     color: active ? 'hotpink' : 'purple',
     planeColor: active ? 'pink' : 'white',
@@ -42,26 +39,38 @@ const Pad = ({
     [audioFile, padToggle, setActiveSound, setPadToggle]
   )
   useEffect(() => {
-    let sound = new THREE.Audio(listener)
-    let audioLoader = new THREE.AudioLoader()
+    const listener = new THREE.AudioListener()
+    const sound = new THREE.Audio(listener)
+    const audioLoader = new THREE.AudioLoader()
+
     audioLoader.load(audioFile.url, function(buffer) {
       sound.setBuffer(buffer)
       sound.play()
       if (sound.isPlaying) {
         sound.stop()
       }
-
       sound.setVolume(0.5)
     })
+
     setSound(sound)
+
     document.addEventListener('keydown', e => {
       const keyName = e.key
       if (keyName === letter) {
         setActivePad(sound)
       }
     })
+
+    return () => {
+      document.removeEventListener('keydown', e => {
+        const keyName = e.key
+        if (keyName === letter) {
+          setActivePad(sound)
+        }
+      })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [audioFile])
   return (
     <>
       <Suspense fallback={null}>
@@ -70,9 +79,6 @@ const Pad = ({
       <group>
         <a.mesh
           onPointerDown={() => {
-            setActivePad(sound)
-          }}
-          onTouchStart={() => {
             setActivePad(sound)
           }}
           position={[x, y, 2]}
