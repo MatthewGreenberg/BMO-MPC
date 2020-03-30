@@ -10,6 +10,7 @@
     "lodash": "^4.17.15",
     "map": "^1.0.1",
     "nice-color-palettes": "^3.0.0",
+    "node-sass": "^4.13.1",
     "postprocessing": "^6.13.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

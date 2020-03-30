@@ -19,7 +19,7 @@ const Box = ({ mouse, setHover }) => {
 
   const { box } = useSpring({
     to: { box: 0 },
-    from: { box: 15 },
+    from: { box: 25 },
     delay: 500,
     config: { mass: 2, tension: 150, friction: 20 },
   })

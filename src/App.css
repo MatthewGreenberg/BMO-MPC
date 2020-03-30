@@ -6,8 +6,18 @@ canvas {
   padding: 0;
   width: 100vw;
   height: 100vh;
+  position: relative;
+  z-index: 0;
 }
 
 body {
-  background: #171717;
+  user-select: none;
+}
+
+.app {
+  max-width: 100rem;
+  margin: auto;
+  /* border: solid 1px red; */
+  position: relative;
+  height: 100vh;
 }

@@ -19,8 +19,8 @@ const Controls = props => {
       args={[camera, gl.domElement]}
       maxPolarAngle={Math.PI / 2}
       minPolarAngle={Math.PI / 2}
-      maxAzimuthAngle={Math.PI / 5}
-      minAzimuthAngle={-Math.PI / 5}
+      maxAzimuthAngle={Math.PI / 6}
+      minAzimuthAngle={-Math.PI / 6}
     />
   )
 }

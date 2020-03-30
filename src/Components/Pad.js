@@ -16,6 +16,7 @@ const Pad = ({
 }) => {
   const [sound, setSound] = useState(null)
   const [active, setActive] = useState(false)
+  const [listener] = useState(() => new THREE.AudioListener())
   const animProps = useSpring({
     color: active ? 'hotpink' : 'purple',
     planeColor: active ? 'pink' : 'white',
@@ -39,7 +40,6 @@ const Pad = ({
     [audioFile, padToggle, setActiveSound, setPadToggle]
   )
   useEffect(() => {
-    let listener = new THREE.AudioListener()
     let sound = new THREE.Audio(listener)
     let audioLoader = new THREE.AudioLoader()
     audioLoader.load(audioFile.url, function(buffer) {

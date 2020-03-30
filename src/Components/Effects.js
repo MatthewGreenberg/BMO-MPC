@@ -39,6 +39,8 @@ export default function Post() {
       radius: 4,
       scale: 0.25,
       bias: 0.3,
+      jsx: 2,
+      pixelRatio: 2,
     })
     const effectPass = new EffectPass(camera, smaaEffect, ssaoEffect)
     effectPass.renderToScreen = true
