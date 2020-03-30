@@ -6,12 +6,13 @@ import React, {
   useEffect,
 } from 'react'
 import './App.css'
-import { Canvas, Dom } from 'react-three-fiber'
+import { Canvas } from 'react-three-fiber'
 import Box from './Components/Box'
 import Controls from './Components/Controls'
 import Plane from './Components/Plane'
 import Effects from './Components/Effects'
 import Loading from './Components/Loading'
+import * as THREE from 'three'
 
 function App() {
   const mouse = useRef([300, -200])
@@ -41,7 +42,13 @@ function App() {
         }}
         gl={{ antialias: true }}
         pixelRatio={window.devicePixelRatio}
+        onCreated={({ gl, scene }) => {
+          gl.toneMapping = THREE.ACESFilmicToneMapping
+          gl.outputEncoding = THREE.sRGBEncoding
+          // scene.background = new THREE.Color('#373740')
+        }}
       >
+        >
         <Controls />
         <spotLight
           shadow-mapSize-width={2048}
@@ -76,7 +83,6 @@ function App() {
         />
         <Plane />
         <Box mouse={mouse} setHover={setHover} />
-
         <Suspense fallback={null}>
           <Effects />
         </Suspense>
