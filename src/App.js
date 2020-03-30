@@ -40,6 +40,7 @@ function App() {
           position: [0, 0, 13],
         }}
         gl={{ antialias: true }}
+        pixelRatio={window.devicePixelRatio}
       >
         <Controls />
         <spotLight
