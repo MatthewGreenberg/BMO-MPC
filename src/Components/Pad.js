@@ -28,7 +28,9 @@ const Pad = ({
   const setActivePad = useCallback(
     sound => {
       setActive(true)
-      sound.stop()
+      if (sound.isPlaying) {
+        sound.stop()
+      }
       sound.play()
       setActiveSound(audioFile)
       setPadToggle(!padToggle)
@@ -45,7 +47,9 @@ const Pad = ({
     audioLoader.load(audioFile.url, function(buffer) {
       sound.setBuffer(buffer)
       sound.play()
-      sound.stop()
+      if (sound.isPlaying) {
+        sound.stop()
+      }
 
       sound.setVolume(0.5)
     })
