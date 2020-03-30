@@ -40,7 +40,7 @@ function App() {
         camera={{
           position: [0, 0, 13],
         }}
-        gl={{ alpha: false, antialias: false, logarithmicDepthBuffer: true }}
+        gl={{ alpha: false, antialias: false }}
         pixelRatio={window.devicePixelRatio}
         onCreated={({ gl, scene }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping
