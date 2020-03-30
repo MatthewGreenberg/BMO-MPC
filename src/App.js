@@ -28,8 +28,7 @@ function App() {
     <Canvas
       onMouseMove={onMouseMove}
       camera={{
-        position: [0, 0, 20],
-        fov: 50,
+        position: [0, 0, 13],
       }}
       gl={{ alpha: false, antialias: false, logarithmicDepthBuffer: false }}
     >
