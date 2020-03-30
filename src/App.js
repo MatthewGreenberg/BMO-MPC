@@ -78,9 +78,11 @@ function App() {
         />
         <Plane />
         <Box mouse={mouse} setHover={setHover} />
-        <Suspense fallback={null}>
-          <Effects />
-        </Suspense>
+        {window.innerWidth > 600 && (
+          <Suspense fallback={null}>
+            <Effects innerWidth={window.innerWidth} />
+          </Suspense>
+        )}
       </Canvas>
     </>
   )

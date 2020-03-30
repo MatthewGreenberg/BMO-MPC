@@ -8,7 +8,7 @@ const Dial = () => {
       rotation={[Math.PI / 2, 0, 0]}
     >
       <cylinderBufferGeometry attach="geometry" args={[0.75, 0.75, 0.5, 32]} />
-      <meshToonMaterial attach="material" color="red" />
+      <meshPhongMaterial attach="material" color="red" />
     </mesh>
   )
 }

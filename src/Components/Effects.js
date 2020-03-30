@@ -18,8 +18,10 @@ SMAAImageLoader.prototype.load = function(_, set) {
   return _load.bind(this)(set)
 }
 
-export default function Post() {
+export default function Effects({ innerWidth }) {
   const { gl, scene, camera, size } = useThree()
+
+  const isMobile = innerWidth < 600
   const smaa = useLoader(SMAAImageLoader)
   const composer = useMemo(() => {
     const composer = new EffectComposer(gl)
@@ -40,6 +42,7 @@ export default function Post() {
       scale: 0.35,
       bias: 0.5,
     })
+
     const effectPass = new EffectPass(camera, smaaEffect, ssaoEffect)
     effectPass.renderToScreen = true
     composer.addPass(normalPass)
