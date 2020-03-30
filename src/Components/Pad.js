@@ -12,6 +12,7 @@ const Pad = ({
   setPadToggle,
   padToggle,
   letter,
+  setHover,
 }) => {
   const [sound, setSound] = useState(null)
   const [active, setActive] = useState(false)
@@ -20,7 +21,6 @@ const Pad = ({
     planeColor: active ? 'pink' : 'white',
     scale: active ? [0.9, 0.9, 0.9] : [1, 1, 1],
     planeScale: active ? [0.8, 0.8, 0.8] : [1, 1, 1],
-
     config: config.default,
   })
 

@@ -1,4 +1,10 @@
-import React, { useRef, useCallback, useState, Suspense } from 'react'
+import React, {
+  useRef,
+  useCallback,
+  useState,
+  Suspense,
+  useEffect,
+} from 'react'
 import './App.css'
 import { Canvas, Dom } from 'react-three-fiber'
 import Box from './Components/Box'
@@ -12,6 +18,11 @@ function App() {
     ({ clientX: x, clientY: y }) =>
       (mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]),
     []
+  )
+  const [hovered, setHover] = useState(false)
+  useEffect(
+    () => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'),
+    [hovered]
   )
   return (
     <Canvas
@@ -57,7 +68,7 @@ function App() {
 
       <Plane />
 
-      <Box mouse={mouse} />
+      <Box mouse={mouse} setHover={setHover} />
       <Suspense fallback={null}>
         <Effects />
       </Suspense>

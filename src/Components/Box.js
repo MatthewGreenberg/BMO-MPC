@@ -10,12 +10,19 @@ import Text from './Text'
 import Trim from './Trim'
 import SwitchButton from './SwitchButton'
 import Eyes from './Eyes'
-import Mouth from './Mouth'
-const Box = ({ mouse }) => {
+import { useSpring, a, config } from 'react-spring/three'
+const Box = ({ mouse, setHover }) => {
   const [pads, setPads] = useState([])
   const [activeSwitch, setActiveSwitch] = useState(0)
   const [activeSound, setActiveSound] = useState(audioFiles[activeSwitch].name)
   const [padToggle, setPadToggle] = useState(false)
+
+  const { box } = useSpring({
+    to: { box: 0 },
+    from: { box: 15 },
+    delay: 500,
+    config: { mass: 2, tension: 150, friction: 20 },
+  })
 
   useEffect(() => {
     let i = 0
@@ -50,6 +57,7 @@ const Box = ({ mouse }) => {
             padToggle={padToggle}
             setPadToggle={setPadToggle}
             letter={letters[i]}
+            setHover={setHover}
           />
         )
         i++
@@ -57,10 +65,14 @@ const Box = ({ mouse }) => {
     setPads(arr)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  console.log('pad toggle is:', padToggle)
   return (
     <>
-      <group rotation={[-Math.PI / 7.5, 0, 0]}>
+      <a.group
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
+        rotation={[-Math.PI / 7.5, 0, 0]}
+        position={box.interpolate(y => [0, y, 0])}
+      >
         <Screen />
         <mesh recieveShadow>
           <boxBufferGeometry attach="geometry" args={[10, 10, 4]} />
@@ -107,9 +119,8 @@ const Box = ({ mouse }) => {
           setActiveSound={setActiveSound}
           name={audioFiles[2].name}
         />
-        {/* <Mouth activeSound={activeSound} /> */}
         <Eyes x={-1.75} y={3} mouse={mouse} />
-      </group>
+      </a.group>
     </>
   )
 }
