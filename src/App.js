@@ -19,6 +19,10 @@ function App() {
   const [hovered, setHover] = useState(false)
   const [loading, setLoading] = useState(true)
 
+  function isMobile() {
+    return window.innerWidth < 600
+  }
+
   const onMouseMove = useCallback(
     ({ clientX: x, clientY: y }) =>
       (mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]),
@@ -38,7 +42,7 @@ function App() {
       <Canvas
         onMouseMove={onMouseMove}
         camera={{
-          position: [0, 0, 13],
+          position: [0, 0, isMobile() ? 15 : 13],
         }}
         gl={{ antialias: false }}
         pixelRatio={window.devicePixelRatio}
@@ -78,7 +82,7 @@ function App() {
         />
         <Plane />
         <Box mouse={mouse} setHover={setHover} />
-        {window.innerWidth > 600 && (
+        {!isMobile() && (
           <Suspense fallback={null}>
             <Effects innerWidth={window.innerWidth} />
           </Suspense>
