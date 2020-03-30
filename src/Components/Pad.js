@@ -38,7 +38,14 @@ const Pad = ({
     },
     [audioFile, padToggle, setActiveSound, setPadToggle]
   )
+
   useEffect(() => {
+    function handleKeydown(e) {
+      const keyName = e.key
+      if (keyName === letter) {
+        setActivePad(sound)
+      }
+    }
     const listener = new THREE.AudioListener()
     const sound = new THREE.Audio(listener)
     const audioLoader = new THREE.AudioLoader()
@@ -54,21 +61,12 @@ const Pad = ({
 
     setSound(sound)
 
-    document.addEventListener('keydown', e => {
-      const keyName = e.key
-      if (keyName === letter) {
-        setActivePad(sound)
-      }
-    })
+    window.addEventListener('keydown', handleKeydown)
 
     return () => {
-      document.removeEventListener('keydown', e => {
-        const keyName = e.key
-        if (keyName === letter) {
-          setActivePad(sound)
-        }
-      })
+      window.removeEventListener('keydown', handleKeydown)
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioFile])
   return (

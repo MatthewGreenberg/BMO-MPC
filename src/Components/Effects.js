@@ -21,7 +21,6 @@ SMAAImageLoader.prototype.load = function(_, set) {
 export default function Effects({ innerWidth }) {
   const { gl, scene, camera, size } = useThree()
 
-  const isMobile = innerWidth < 600
   const smaa = useLoader(SMAAImageLoader)
   const composer = useMemo(() => {
     const composer = new EffectComposer(gl)
