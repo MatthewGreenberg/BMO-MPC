@@ -18,6 +18,7 @@ function App() {
   const mouse = useRef([300, -200])
   const [hovered, setHover] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [activeSwitch, setActiveSwitch] = useState(0)
 
   function isMobile() {
     return window.innerWidth < 600
@@ -80,11 +81,16 @@ function App() {
           color="orange"
           position={[-3, -1, 5]}
         />
-        <Plane />
-        <Box mouse={mouse} setHover={setHover} />
+        <Plane activeSwitch={activeSwitch} />
+        <Box
+          activeSwitch={activeSwitch}
+          setActiveSwitch={setActiveSwitch}
+          mouse={mouse}
+          setHover={setHover}
+        />
         {!isMobile() && (
           <Suspense fallback={null}>
-            <Effects innerWidth={window.innerWidth} />
+            <Effects activeSwitch={activeSwitch} />
           </Suspense>
         )}
       </Canvas>

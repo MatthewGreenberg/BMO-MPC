@@ -1,10 +1,19 @@
 import React from 'react'
 
-const Screen = () => {
+const Screen = ({ activeSwitch }) => {
+  function returnMaterial() {
+    if (activeSwitch === 0) {
+      return <meshToonMaterial attach="material" color="lightgray" />
+    } else if (activeSwitch === 1) {
+      return <meshToonMaterial attach="material" color="lightgray" />
+    } else {
+      return <meshNormalMaterial attach="material" />
+    }
+  }
   return (
     <mesh recieveShadow position={[0, 2.75, 1.75]}>
       <boxBufferGeometry attach="geometry" args={[8, 3.25]} />
-      <meshToonMaterial attach="material" color="lightgray" />
+      {returnMaterial()}
     </mesh>
   )
 }

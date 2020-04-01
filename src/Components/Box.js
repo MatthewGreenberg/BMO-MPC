@@ -9,11 +9,10 @@ import audioFiles from '../AudioFiles'
 import Text from './Text'
 import Trim from './Trim'
 import Eyes from './Eyes'
-import { useSpring, a, config } from 'react-spring/three'
+import { useSpring, a } from 'react-spring/three'
 import SwitchButtons from './SwitchButtons'
-const Box = ({ mouse, setHover }) => {
+const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
   const [pads, setPads] = useState([])
-  const [activeSwitch, setActiveSwitch] = useState(0)
   const [activeSound, setActiveSound] = useState(audioFiles[activeSwitch].name)
   const [padToggle, setPadToggle] = useState(false)
 
@@ -23,6 +22,30 @@ const Box = ({ mouse, setHover }) => {
     delay: 500,
     config: { mass: 2, tension: 150, friction: 20 },
   })
+
+  function returnMaterial() {
+    if (activeSwitch === 0) {
+      return (
+        <meshToonMaterial
+          specular={new THREE.Color('skyblue')}
+          shininess={5}
+          attach="material"
+          color="teal"
+        />
+      )
+    } else if (activeSwitch === 1) {
+      return (
+        <meshToonMaterial
+          specular={new THREE.Color('white')}
+          shininess={5}
+          attach="material"
+          color="white"
+        />
+      )
+    } else {
+      return <meshNormalMaterial attach="material" />
+    }
+  }
 
   useEffect(() => {
     let i = 0
@@ -58,6 +81,7 @@ const Box = ({ mouse, setHover }) => {
             setPadToggle={setPadToggle}
             letter={letters[i]}
             setHover={setHover}
+            activeSwitch={activeSwitch}
           />
         )
         i++
@@ -73,18 +97,13 @@ const Box = ({ mouse, setHover }) => {
         rotation={[-Math.PI / 7.5, 0, 0]}
         position={box.interpolate(y => [0, y, 0])}
       >
-        <Screen />
+        <Screen activeSwitch={activeSwitch} />
         <mesh recieveShadow>
           <boxBufferGeometry attach="geometry" args={[10, 10, 4]} />
-          <meshToonMaterial
-            specular={new THREE.Color('skyblue')}
-            shininess={5}
-            attach="material"
-            color="teal"
-          />
+          {returnMaterial()}
         </mesh>
         <group>{pads}</group>
-        <Dial />
+        <Dial activeSwitch={activeSwitch} />
         <Suspense fallback={null}>
           <Text child={activeSound.name || activeSound} />
         </Suspense>

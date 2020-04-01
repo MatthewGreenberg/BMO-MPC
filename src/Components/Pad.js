@@ -11,6 +11,7 @@ const Pad = ({
   setPadToggle,
   padToggle,
   letter,
+  activeSwitch,
 }) => {
   const [sound, setSound] = useState(null)
   const [active, setActive] = useState(false)
@@ -21,6 +22,40 @@ const Pad = ({
     planeScale: active ? [0.8, 0.8, 0.8] : [1, 1, 1],
     config: config.default,
   })
+
+  function returnMaterial() {
+    if (activeSwitch === 0) {
+      return <a.meshPhongMaterial attach="material" color={animProps.color} />
+    } else if (activeSwitch === 1) {
+      return <a.meshPhongMaterial attach="material" color={animProps.color} />
+    } else {
+      return <meshNormalMaterial attach="material" />
+    }
+  }
+
+  function returnPlaneMaterial() {
+    if (activeSwitch === 0) {
+      return (
+        <a.meshToonMaterial
+          transparent={true}
+          opacity={0.75}
+          attach="material"
+          color={animProps.planeColor}
+        />
+      )
+    } else if (activeSwitch === 1) {
+      return (
+        <a.meshToonMaterial
+          transparent={true}
+          opacity={0.75}
+          attach="material"
+          color={animProps.planeColor}
+        />
+      )
+    } else {
+      return <meshNormalMaterial attach="material" />
+    }
+  }
 
   const setActivePad = useCallback(
     sound => {
@@ -84,16 +119,11 @@ const Pad = ({
           recieveShadow
         >
           <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-          <a.meshPhongMaterial attach="material" color={animProps.color} />
+          {returnMaterial()}
         </a.mesh>
         <a.mesh scale={animProps.planeScale} castShadow position={[x, y, 2.51]}>
           <planeBufferGeometry attach="geometry" args={[0.8, 0.8, 0.1]} />
-          <a.meshToonMaterial
-            transparent={true}
-            opacity={0.75}
-            attach="material"
-            color={animProps.planeColor}
-          />
+          {returnPlaneMaterial()}
         </a.mesh>
       </group>
     </>
