@@ -87,10 +87,7 @@ const Pad = ({
 
     audioLoader.load(audioFile.url, function(buffer) {
       sound.setBuffer(buffer)
-      sound.play()
-      if (sound.isPlaying) {
-        sound.stop()
-      }
+
       sound.setVolume(0.5)
     })
 

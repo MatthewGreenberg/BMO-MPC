@@ -41,7 +41,7 @@ export default function Effects({ activeSwitch }) {
 
     const ssaoEffect = new SSAOEffect(camera, normalPass.renderTarget.texture, {
       blendFunction: BlendFunction.SUBTRACT,
-      samples: 15,
+      samples: 25,
       rings: 2,
       distanceThreshold: 1, // Render distance depends on camera near&far.
       distanceFalloff: 0, // No need for falloff.
@@ -65,7 +65,12 @@ export default function Effects({ activeSwitch }) {
     }
 
     const effectPass1 = new EffectPass(...pass)
-    const effectPass2 = new EffectPass(camera, noiseEffect, pixelationEffect)
+    const effectPass2 = new EffectPass(
+      camera,
+      noiseEffect,
+      pixelationEffect,
+      glitchEffect
+    )
     const effectPass3 = new EffectPass(...pass)
 
     composer.addPass(normalPass)

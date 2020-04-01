@@ -12,7 +12,7 @@ import Controls from './Components/Controls'
 import Plane from './Components/Plane'
 import Effects from './Components/Effects'
 import Loading from './Components/Loading'
-import * as THREE from 'three'
+import { useSpring, a } from 'react-spring/three'
 
 function App() {
   const mouse = useRef([300, -200])
@@ -23,6 +23,10 @@ function App() {
   function isMobile() {
     return window.innerWidth < 600
   }
+
+  const animProps = useSpring({
+    angle: activeSwitch === 0 ? Math.PI / 6 : Math.PI / 3,
+  })
 
   const onMouseMove = useCallback(
     ({ clientX: x, clientY: y }) =>
@@ -48,15 +52,15 @@ function App() {
         gl={{ antialias: false }}
         pixelRatio={window.devicePixelRatio}
       >
-        >
         <Controls />
-        <spotLight
+        <a.spotLight
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
           penumbra={1}
           castShadow
+          angle={animProps.angle}
           intensity={0.5}
-          position={[4, 10, 3]}
+          position={[4, 10, 5]}
         />
         <spotLight
           shadow-mapSize-width={2048}

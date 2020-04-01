@@ -19,7 +19,7 @@ const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
   const { box } = useSpring({
     to: { box: 0 },
     from: { box: 25 },
-    delay: 500,
+    delay: 600,
     config: { mass: 2, tension: 150, friction: 20 },
   })
 
@@ -113,7 +113,7 @@ const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
           position={[0, 4, 3]}
           scale={[0.3, 0.3, 0.3]}
         />
-        <Trim position={[0, -4.85, 2.05]} />
+        <Trim activeSwitch={activeSwitch} position={[0, -4.85, 2.05]} />
         <SwitchButtons
           audioFiles={audioFiles}
           setActiveSound={setActiveSound}

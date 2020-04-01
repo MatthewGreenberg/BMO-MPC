@@ -4,17 +4,16 @@ import { extend, useFrame, useThree } from 'react-three-fiber'
 
 extend({ OrbitControls })
 
-const Controls = props => {
+const Controls = () => {
   const { camera, gl } = useThree()
   const orbitRef = useRef()
-  const { enabled } = props
   useFrame(() => {
     orbitRef.current.update()
   })
   return (
     <orbitControls
-      enabled={enabled}
       enableZoom={false}
+      enablePan={false}
       ref={orbitRef}
       args={[camera, gl.domElement]}
       maxPolarAngle={Math.PI / 2}
