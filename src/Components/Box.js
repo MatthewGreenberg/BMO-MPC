@@ -1,6 +1,6 @@
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense } from 'react'
 import Pad from './Pad'
-import Screen from './Screen'
+import Screen from './Screen/Screen'
 import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { v1 as uuid } from 'uuid'
@@ -26,7 +26,6 @@ const Box = ({
   const { box } = useSpring({
     to: { box: 0 },
     from: { box: 25 },
-    delay: 600,
     config: { mass: 2, tension: 150, friction: 20 },
   })
 
@@ -108,7 +107,11 @@ const Box = ({
         rotation={animProps.rotation}
         position={box.interpolate(y => [0, y, 0])}
       >
-        <Screen activeSwitch={activeSwitch} />
+        <Screen
+          effectMode={effectMode}
+          activeSwitch={activeSwitch}
+          setEffectMode={setEffectMode}
+        />
         <mesh recieveShadow>
           <boxBufferGeometry attach="geometry" args={[10, 10, 4]} />
           {returnMaterial()}

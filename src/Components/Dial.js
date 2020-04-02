@@ -12,7 +12,7 @@ const Dial = ({ activeSwitch, setEffectMode, effectMode }) => {
   }
   return (
     <mesh
-      position={[3, -1.5, 2.25]}
+      position={[3, -1.75, 2.25]}
       receiveShadow
       rotation={[Math.PI / 2, 0, 0]}
       onPointerDown={() => setEffectMode(!effectMode)}

@@ -13,20 +13,19 @@ import Plane from './Components/Plane'
 import Effects from './Components/Effects'
 import Loading from './Components/Loading'
 import { useSpring, a } from 'react-spring/three'
+import EffectControl from './Components/EffectControl'
 
 function Dolly({ effectMode }) {
   useFrame(({ _, camera }) => {
     if (effectMode) {
       camera.updateProjectionMatrix(
-        void (camera.position.z > 5
-          ? (camera.position.z -= 0.5)
-          : camera.position.z,
+        void (camera.position.z > 6.5 ? (camera.position.z -= 0.5) : null,
         (camera.position.y = 2.5))
       )
     } else {
       camera.updateProjectionMatrix(
         void (camera.position.z < 13
-          ? (camera.position.z += 0.5)
+          ? (camera.position.z += 0.3)
           : camera.position.z),
         (camera.position.y = 0)
       )
@@ -68,6 +67,7 @@ function App() {
   return (
     <>
       {loading && <Loading />}
+
       <Canvas
         onMouseMove={onMouseMove}
         camera={{
