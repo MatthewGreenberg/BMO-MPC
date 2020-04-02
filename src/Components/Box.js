@@ -11,7 +11,14 @@ import Trim from './Trim'
 import Eyes from './Eyes'
 import { useSpring, a } from 'react-spring/three'
 import SwitchButtons from './SwitchButtons'
-const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
+const Box = ({
+  mouse,
+  setHover,
+  activeSwitch,
+  setActiveSwitch,
+  effectMode,
+  setEffectMode,
+}) => {
   const [pads, setPads] = useState([])
   const [activeSound, setActiveSound] = useState(audioFiles[activeSwitch].name)
   const [padToggle, setPadToggle] = useState(false)
@@ -21,6 +28,10 @@ const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
     from: { box: 25 },
     delay: 600,
     config: { mass: 2, tension: 150, friction: 20 },
+  })
+
+  const animProps = useSpring({
+    rotation: effectMode ? [0, 0, 0] : [-Math.PI / 7.5, 0, 0],
   })
 
   function returnMaterial() {
@@ -94,7 +105,7 @@ const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
       <a.group
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
-        rotation={[-Math.PI / 7.5, 0, 0]}
+        rotation={animProps.rotation}
         position={box.interpolate(y => [0, y, 0])}
       >
         <Screen activeSwitch={activeSwitch} />
@@ -103,9 +114,16 @@ const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
           {returnMaterial()}
         </mesh>
         <group>{pads}</group>
-        <Dial activeSwitch={activeSwitch} />
+        <Dial
+          activeSwitch={activeSwitch}
+          setEffectMode={setEffectMode}
+          effectMode={effectMode}
+        />
         <Suspense fallback={null}>
-          <Text child={activeSound.name || activeSound} />
+          <Text
+            effectMode={effectMode}
+            child={activeSound.name || activeSound}
+          />
         </Suspense>
         <pointLight
           color="hotpink"
@@ -120,7 +138,7 @@ const Box = ({ mouse, setHover, activeSwitch, setActiveSwitch }) => {
           setActiveSwitch={setActiveSwitch}
           activeSwitch={activeSwitch}
         />
-        <Eyes x={-1.75} y={3} mouse={mouse} />
+        <Eyes x={-1.75} y={3} mouse={mouse} effectMode={effectMode} />
       </a.group>
     </>
   )

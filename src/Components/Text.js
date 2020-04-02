@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { useLoader } from 'react-three-fiber'
 import { useSpring, a, config } from 'react-spring/three'
 
-const Text = ({ child }) => {
+const Text = ({ child, effectMode }) => {
   const [active, setActive] = useState(true)
   const font = useLoader(
     THREE.FontLoader,
@@ -26,12 +26,17 @@ const Text = ({ child }) => {
 
   const animProps = useSpring({
     position: active ? [-3.25, 1.37, 2.3] : [-3.5, 1.37, 2.3],
-
+    scale: effectMode ? [0.00001, 0.00001, 0.00001] : [1, 1, 1],
     config: config.default,
   })
 
   return (
-    <a.mesh frustumCulled={false} receiveShadow position={animProps.position}>
+    <a.mesh
+      scale={animProps.scale}
+      frustumCulled={false}
+      receiveShadow
+      position={animProps.position}
+    >
       <textBufferGeometry attach="geometry" args={[child, config]} />
       <a.meshToonMaterial
         transparent={true}

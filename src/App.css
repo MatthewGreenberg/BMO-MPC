@@ -12,6 +12,7 @@ canvas {
 
 body {
   user-select: none;
+  font-family: 'Major Mono Display', monospace;
 }
 
 .app {

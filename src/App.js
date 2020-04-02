@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from 'react'
 import './App.css'
-import { Canvas } from 'react-three-fiber'
+import { Canvas, useFrame } from 'react-three-fiber'
 import Box from './Components/Box'
 import Controls from './Components/Controls'
 import Plane from './Components/Plane'
@@ -14,10 +14,33 @@ import Effects from './Components/Effects'
 import Loading from './Components/Loading'
 import { useSpring, a } from 'react-spring/three'
 
+function Dolly({ effectMode }) {
+  useFrame(({ _, camera }) => {
+    if (effectMode) {
+      camera.updateProjectionMatrix(
+        void (camera.position.z > 5
+          ? (camera.position.z -= 0.5)
+          : camera.position.z,
+        (camera.position.y = 2.5))
+      )
+    } else {
+      camera.updateProjectionMatrix(
+        void (camera.position.z < 13
+          ? (camera.position.z += 0.5)
+          : camera.position.z),
+        (camera.position.y = 0)
+      )
+    }
+  })
+
+  return null
+}
+
 function App() {
   const mouse = useRef([300, -200])
   const [hovered, setHover] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [effectMode, setEffectMode] = useState(false)
   const [activeSwitch, setActiveSwitch] = useState(0)
 
   function isMobile() {
@@ -33,6 +56,7 @@ function App() {
       (mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]),
     []
   )
+
   useEffect(
     () => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'),
     [hovered]
@@ -47,12 +71,12 @@ function App() {
       <Canvas
         onMouseMove={onMouseMove}
         camera={{
-          position: [0, 0, isMobile() ? 15 : 13],
+          position: [0, 0, 15],
         }}
         gl={{ antialias: false }}
         pixelRatio={window.devicePixelRatio}
       >
-        <Controls />
+        <Controls effectMode={effectMode} />
         <a.spotLight
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
@@ -91,12 +115,15 @@ function App() {
           setActiveSwitch={setActiveSwitch}
           mouse={mouse}
           setHover={setHover}
+          setEffectMode={setEffectMode}
+          effectMode={effectMode}
         />
         {!isMobile() && (
           <Suspense fallback={null}>
             <Effects activeSwitch={activeSwitch} />
           </Suspense>
         )}
+        <Dolly effectMode={effectMode} />
       </Canvas>
     </>
   )

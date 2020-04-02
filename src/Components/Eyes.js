@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useFrame } from 'react-three-fiber'
 import { useSpring, a, config } from 'react-spring/three'
 
-const Eyes = ({ x, y, mouse }) => {
+const Eyes = ({ x, y, mouse, effectMode }) => {
   const eyeBall = useRef()
   const eyeBall2 = useRef()
   let timer = useRef()
@@ -26,12 +26,17 @@ const Eyes = ({ x, y, mouse }) => {
       setShut(true)
       setTimeout(() => setShut(false), randomNumber(100, 500))
     }
-
+    if (effectMode) {
+      setShut(true)
+      clearInterval(timer.current)
+      return
+    }
     toggleShut()
-  }, [])
+  }, [effectMode])
 
   const animProps = useSpring({
-    scale: shut ? [1, 0, 0] : [1, 1, 1],
+    // Setting scale value > 0 gets rid of annoying console warnings
+    scale: shut ? [1, 0.00000001, 0.00000001] : [1, 1, 1],
     config: { duration: 250 },
   })
 

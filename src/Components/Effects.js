@@ -68,8 +68,8 @@ export default function Effects({ activeSwitch }) {
     const effectPass2 = new EffectPass(
       camera,
       noiseEffect,
-      pixelationEffect,
-      glitchEffect
+      pixelationEffect
+      // glitchEffect
     )
     const effectPass3 = new EffectPass(...pass)
 

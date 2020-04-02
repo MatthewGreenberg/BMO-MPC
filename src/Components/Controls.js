@@ -4,12 +4,13 @@ import { extend, useFrame, useThree } from 'react-three-fiber'
 
 extend({ OrbitControls })
 
-const Controls = () => {
+const Controls = ({ effectMode }) => {
   const { camera, gl } = useThree()
   const orbitRef = useRef()
   useFrame(() => {
     orbitRef.current.update()
   })
+
   return (
     <orbitControls
       enableZoom={false}
@@ -18,8 +19,8 @@ const Controls = () => {
       args={[camera, gl.domElement]}
       maxPolarAngle={Math.PI / 2}
       minPolarAngle={Math.PI / 2}
-      maxAzimuthAngle={Math.PI / 6}
-      minAzimuthAngle={-Math.PI / 6}
+      maxAzimuthAngle={effectMode ? 0 : Math.PI / 7}
+      minAzimuthAngle={effectMode ? 0 : -Math.PI / 7}
     />
   )
 }
