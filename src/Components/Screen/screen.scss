@@ -16,6 +16,7 @@ button {
 
 .effects-wrapper {
   opacity: 0;
+  will-change: opacity;
 }
 
 .effect-wrapper {

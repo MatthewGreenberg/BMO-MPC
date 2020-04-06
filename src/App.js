@@ -22,7 +22,7 @@ function Dolly({ effectMode }) {
         void (camera.position.z > 6.5 ? (camera.position.z -= 0.5) : null,
         (camera.position.y = 2.5))
       )
-    } else {
+    } else if (!effectMode) {
       camera.updateProjectionMatrix(
         void (camera.position.z < 13
           ? (camera.position.z += 0.3)
@@ -71,7 +71,7 @@ function App() {
       <Canvas
         onMouseMove={onMouseMove}
         camera={{
-          position: [0, 0, 15],
+          position: [0, 0, 13],
         }}
         gl={{ antialias: false }}
         pixelRatio={window.devicePixelRatio}
@@ -118,11 +118,10 @@ function App() {
           setEffectMode={setEffectMode}
           effectMode={effectMode}
         />
-        {!isMobile() && (
-          <Suspense fallback={null}>
-            <Effects activeSwitch={activeSwitch} />
-          </Suspense>
-        )}
+
+        <Suspense fallback={null}>
+          <Effects activeSwitch={activeSwitch} />
+        </Suspense>
         <Dolly effectMode={effectMode} />
       </Canvas>
     </>

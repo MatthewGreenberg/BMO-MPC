@@ -18,9 +18,9 @@ const ScreenDom = ({ setEffectMode, effectMode }) => {
   }, [])
 
   const animProps = useSpring({
-    opacity: effectMode ? 0.7 : 0,
+    opacity: effectMode ? 0.7 : 0.00001,
     delay: effectMode ? 500 : 0,
-    config: { duration: effectMode ? 1500 : 0 },
+    config: { duration: effectMode ? 1000 : 0 },
   })
 
   return (
@@ -32,7 +32,7 @@ const ScreenDom = ({ setEffectMode, effectMode }) => {
         <h1>CONTROLS</h1>
         <Effect
           setEffectAmount={setReverbAmount}
-          name="revErb"
+          name="reVerb"
           effectAmount={reverbAmount}
           player={player}
         />

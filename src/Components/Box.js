@@ -125,6 +125,7 @@ const Box = ({
         <Suspense fallback={null}>
           <Text
             effectMode={effectMode}
+            activeSwitch={activeSwitch}
             child={activeSound.name || activeSound}
           />
         </Suspense>

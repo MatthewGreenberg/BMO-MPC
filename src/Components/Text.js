@@ -1,9 +1,9 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import * as THREE from 'three'
 import { useLoader } from 'react-three-fiber'
-import { useSpring, a, config } from 'react-spring/three'
+import { useSpring, a } from 'react-spring/three'
 
-const Text = ({ child, effectMode }) => {
+const Text = ({ child, effectMode, activeSwitch }) => {
   const [active, setActive] = useState(true)
   const font = useLoader(
     THREE.FontLoader,
