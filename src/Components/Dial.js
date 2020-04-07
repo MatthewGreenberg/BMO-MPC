@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 const Dial = ({ activeSwitch, setEffectMode, effectMode }) => {
-  function returnMaterial() {
+  const returnMaterial = useMemo(() => {
     if (activeSwitch === 0) {
       return <meshPhongMaterial attach="material" color="red" />
     } else if (activeSwitch === 1) {
@@ -9,7 +9,7 @@ const Dial = ({ activeSwitch, setEffectMode, effectMode }) => {
     } else {
       return <meshNormalMaterial attach="material" />
     }
-  }
+  }, [activeSwitch])
   return (
     <mesh
       position={[3, -1.75, 2.25]}
@@ -18,7 +18,7 @@ const Dial = ({ activeSwitch, setEffectMode, effectMode }) => {
       onPointerDown={() => setEffectMode(!effectMode)}
     >
       <cylinderBufferGeometry attach="geometry" args={[0.75, 0.75, 0.5, 32]} />
-      {returnMaterial()}
+      {returnMaterial}
     </mesh>
   )
 }

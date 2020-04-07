@@ -9,6 +9,31 @@ const Text = ({ child, effectMode, activeSwitch }) => {
     THREE.FontLoader,
     process.env.PUBLIC_URL + 'MOONGET_Heavy.blob'
   )
+
+  const returnMaterial = useMemo(() => {
+    if (activeSwitch === 0) {
+      return (
+        <a.meshToonMaterial
+          transparent={true}
+          opacity={1}
+          color="yellow"
+          attach="material"
+        />
+      )
+    } else if (activeSwitch === 1) {
+      return (
+        <a.meshToonMaterial
+          transparent={true}
+          opacity={1}
+          color="yellow"
+          attach="material"
+        />
+      )
+    } else {
+      return <meshBasicMaterial color="white" attach="material" />
+    }
+  }, [activeSwitch])
+
   const config = useMemo(
     () => ({
       font,
@@ -38,12 +63,7 @@ const Text = ({ child, effectMode, activeSwitch }) => {
       position={animProps.position}
     >
       <textBufferGeometry attach="geometry" args={[child, config]} />
-      <a.meshToonMaterial
-        transparent={true}
-        opacity={1}
-        color="yellow"
-        attach="material"
-      />
+      {returnMaterial}
     </a.mesh>
   )
 }

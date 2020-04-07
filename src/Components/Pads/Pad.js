@@ -1,7 +1,15 @@
-import React, { useEffect, useState, useCallback, Suspense } from 'react'
-import * as THREE from 'three'
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  Suspense,
+  useMemo,
+  useContext,
+} from 'react'
+import * as Tone from 'tone'
+import { EffectContext } from '../../EffectContext'
 import { useSpring, a, config } from 'react-spring/three'
-import PadText from './PadText'
+import PadText from '../PadText'
 
 const Pad = ({
   x,
@@ -12,8 +20,9 @@ const Pad = ({
   padToggle,
   letter,
   activeSwitch,
+  kit,
 }) => {
-  const [sound, setSound] = useState(null)
+  const [player, setPlayer] = useState(null)
   const [active, setActive] = useState(false)
   const animProps = useSpring({
     color: active ? 'hotpink' : 'purple',
@@ -23,7 +32,10 @@ const Pad = ({
     config: config.default,
   })
 
-  function returnMaterial() {
+  const effects = useContext(EffectContext)
+  const { distortion, reverb, delay } = effects
+
+  const returnMaterial = useMemo(() => {
     if (activeSwitch === 0) {
       return <a.meshPhongMaterial attach="material" color={animProps.color} />
     } else if (activeSwitch === 1) {
@@ -31,7 +43,7 @@ const Pad = ({
     } else {
       return <meshNormalMaterial attach="material" />
     }
-  }
+  }, [activeSwitch, animProps.color])
 
   function returnPlaneMaterial() {
     if (activeSwitch === 0) {
@@ -58,40 +70,59 @@ const Pad = ({
   }
 
   const setActivePad = useCallback(
-    sound => {
+    (player) => {
       setActive(true)
-      if (sound.isPlaying) {
-        sound.stop()
-      }
-      sound.play()
+      player.stop().start()
       setActiveSound(audioFile)
       setPadToggle(!padToggle)
-
-      setTimeout(function() {
+      setTimeout(function () {
         setActive(false)
-      }, 200)
+      }, 100)
     },
     [audioFile, padToggle, setActiveSound, setPadToggle]
   )
+  useEffect(() => {
+    if (!player) {
+      return
+    }
+    const distortionInstance = distortion.instance
+    player.connect(distortionInstance)
+
+    distortionInstance.wet.value = distortion.value
+  }, [distortion.instance, distortion.value, player])
 
   useEffect(() => {
+    if (!player) {
+      return
+    }
+    const reverbInstance = reverb.instance
+    player.connect(reverbInstance)
+    reverbInstance.wet.value = reverb.value
+  }, [player, reverb.instance, reverb.value])
+
+  useEffect(() => {
+    if (!player) {
+      return
+    }
+    const delayInstance = delay.instance
+    player.connect(delayInstance)
+
+    delayInstance.wet.value = delay.value
+  }, [delay.instance, delay.value, distortion.value, player])
+
+  useEffect(() => {
+    const player = new Tone.Player({
+      url: audioFile.url,
+    }).toMaster()
+
+    player.volume.value = -12
+    setPlayer(player)
     function handleKeydown(e) {
       const keyName = e.key
       if (keyName === letter) {
-        setActivePad(sound)
+        setActivePad(player)
       }
     }
-    const listener = new THREE.AudioListener()
-    const sound = new THREE.Audio(listener)
-    const audioLoader = new THREE.AudioLoader()
-
-    audioLoader.load(audioFile.url, function(buffer) {
-      sound.setBuffer(buffer)
-
-      sound.setVolume(0.5)
-    })
-
-    setSound(sound)
 
     window.addEventListener('keydown', handleKeydown)
 
@@ -109,14 +140,14 @@ const Pad = ({
       <group>
         <a.mesh
           onPointerDown={() => {
-            setActivePad(sound)
+            setActivePad(player)
           }}
           position={[x, y, 2]}
           scale={animProps.scale}
           recieveShadow
         >
           <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-          {returnMaterial()}
+          {returnMaterial}
         </a.mesh>
         <a.mesh scale={animProps.planeScale} castShadow position={[x, y, 2.51]}>
           <planeBufferGeometry attach="geometry" args={[0.8, 0.8, 0.1]} />

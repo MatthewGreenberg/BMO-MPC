@@ -10,21 +10,53 @@ import { Canvas, useFrame } from 'react-three-fiber'
 import Box from './Components/Box'
 import Controls from './Components/Controls'
 import Plane from './Components/Plane'
-import Effects from './Components/Effects'
 import Loading from './Components/Loading'
 import { useSpring, a } from 'react-spring/three'
-import EffectControl from './Components/EffectControl'
+import { EffectContext } from './EffectContext'
+import Effects from './Components/Effects'
+
+function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  })
+  return ref.current
+}
 
 function Dolly({ effectMode }) {
+  const [zIndex, set] = useState(13)
+  const [active, setActive] = useState(false)
+  const prevEffectMode = usePrevious({ effectMode })
+
+  useEffect(() => {
+    if (!prevEffectMode?.effectMode && effectMode) {
+      setActive(true)
+    } else {
+      setTimeout(() => setActive(false), 500)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [effectMode])
+
+  useEffect(() => {
+    function isMobile() {
+      return window.innerWidth < 600
+    }
+    if (isMobile()) {
+      set(16)
+    }
+  }, [])
   useFrame(({ _, camera }) => {
+    if (!active) {
+      return
+    }
     if (effectMode) {
       camera.updateProjectionMatrix(
-        void (camera.position.z > 6.5 ? (camera.position.z -= 0.5) : null,
-        (camera.position.y = 2.5))
+        void (camera.position.z > 6.5 ? (camera.position.z -= 0.5) : null),
+        (camera.position.y = 2.5)
       )
-    } else if (!effectMode) {
+    } else {
       camera.updateProjectionMatrix(
-        void (camera.position.z < 13
+        void (camera.position.z < zIndex
           ? (camera.position.z += 0.3)
           : camera.position.z),
         (camera.position.y = 0)
@@ -65,15 +97,15 @@ function App() {
   }, [])
 
   return (
-    <>
+    <EffectContext.Provider>
       {loading && <Loading />}
 
       <Canvas
         onMouseMove={onMouseMove}
         camera={{
-          position: [0, 0, 13],
+          position: [0, 0, isMobile() ? 16 : 13],
         }}
-        gl={{ antialias: false }}
+        gl={{ antialias: true }}
         pixelRatio={window.devicePixelRatio}
       >
         <Controls effectMode={effectMode} />
@@ -124,7 +156,7 @@ function App() {
         </Suspense>
         <Dolly effectMode={effectMode} />
       </Canvas>
-    </>
+    </EffectContext.Provider>
   )
 }
 

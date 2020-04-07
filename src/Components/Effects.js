@@ -41,15 +41,15 @@ export default function Effects({ activeSwitch }) {
     const ssaoEffect = new SSAOEffect(camera, normalPass.renderTarget.texture, {
       blendFunction: BlendFunction.SUBTRACT,
       samples: 15,
-      rings: 2,
-      distanceThreshold: 1, // Render distance depends on camera near&far.
-      distanceFalloff: 0, // No need for falloff.
-      rangeThreshold: 0, // Larger value works better for this camera frustum.
-      rangeFalloff: 0.1,
-      luminanceInfluence: 1,
-      radius: 30,
-      scale: 0.35,
-      bias: 0.5,
+      // rings: 2,
+      // distanceThreshold: 1, // Render distance depends on camera near&far.
+      // distanceFalloff: 0, // No need for falloff.
+      // rangeThreshold: 0, // Larger value works better for this camera frustum.
+      // rangeFalloff: 0.1,
+      // luminanceInfluence: 1,
+      // radius: 30,
+      scale: 0.45,
+      // bias: 0.5,
     })
     const noiseEffect = new NoiseEffect({
       blendFunction: BlendFunction.AVERAGE,
@@ -57,10 +57,7 @@ export default function Effects({ activeSwitch }) {
     })
     noiseEffect.blendMode.opacity.value = 0.2
 
-    let pass = [camera]
-    if (!isMobile()) {
-      pass.push(ssaoEffect)
-    }
+    let pass = [camera, ssaoEffect]
 
     const effectPass1 = new EffectPass(...pass)
     const effectPass2 = new EffectPass(camera, noiseEffect, pixelationEffect)

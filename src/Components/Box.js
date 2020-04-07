@@ -1,9 +1,8 @@
-import React, { Suspense } from 'react'
-import Pad from './Pad'
+import React, { Suspense, useMemo } from 'react'
+import Pad from './Pads/Pad'
 import Screen from './Screen/Screen'
 import { useEffect, useState } from 'react'
 import * as THREE from 'three'
-import { v1 as uuid } from 'uuid'
 import Dial from './Dial'
 import audioFiles from '../AudioFiles'
 import Text from './Text'
@@ -11,6 +10,9 @@ import Trim from './Trim'
 import Eyes from './Eyes'
 import { useSpring, a } from 'react-spring/three'
 import SwitchButtons from './SwitchButtons'
+import PadContainer from './Pads/PadContainer'
+import { EffectContext } from '../EffectContext'
+
 const Box = ({
   mouse,
   setHover,
@@ -19,9 +21,7 @@ const Box = ({
   effectMode,
   setEffectMode,
 }) => {
-  const [pads, setPads] = useState([])
   const [activeSound, setActiveSound] = useState(audioFiles[activeSwitch].name)
-  const [padToggle, setPadToggle] = useState(false)
 
   const { box } = useSpring({
     to: { box: 0 },
@@ -33,7 +33,8 @@ const Box = ({
     rotation: effectMode ? [0, 0, 0] : [-Math.PI / 7.5, 0, 0],
   })
 
-  function returnMaterial() {
+  const returnMaterial = useMemo(() => {
+    console.log('foo')
     if (activeSwitch === 0) {
       return (
         <meshToonMaterial
@@ -55,68 +56,30 @@ const Box = ({
     } else {
       return <meshNormalMaterial attach="material" />
     }
-  }
-
-  useEffect(() => {
-    let i = 0
-    let arr = []
-    const letters = [
-      'z',
-      'a',
-      'q',
-      '1',
-      'x',
-      's',
-      'w',
-      '2',
-      'c',
-      'd',
-      'e',
-      '3',
-      'v',
-      'f',
-      'r',
-      '4',
-    ]
-    for (let x = -3.5; x <= 0.5; x += 1.3)
-      for (let y = -4; y <= 0; y += 1.3) {
-        arr.push(
-          <Pad
-            setActiveSound={setActiveSound}
-            key={uuid()}
-            x={x}
-            y={y}
-            audioFile={audioFiles[activeSwitch].sounds[i]}
-            padToggle={padToggle}
-            setPadToggle={setPadToggle}
-            letter={letters[i]}
-            setHover={setHover}
-            activeSwitch={activeSwitch}
-          />
-        )
-        i++
-      }
-    setPads(arr)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSwitch])
+
   return (
     <>
       <a.group
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
         rotation={animProps.rotation}
-        position={box.interpolate(y => [0, y, 0])}
+        position={box.interpolate((y) => [0, y, 0])}
+        recieveShadow
       >
+        <mesh>
+          <boxBufferGeometry attach="geometry" args={[10, 10, 4]} />
+          {returnMaterial}
+        </mesh>
+        <PadContainer
+          activeSwitch={activeSwitch}
+          setActiveSound={setActiveSound}
+        />
         <Screen
           effectMode={effectMode}
           activeSwitch={activeSwitch}
           setEffectMode={setEffectMode}
         />
-        <mesh recieveShadow>
-          <boxBufferGeometry attach="geometry" args={[10, 10, 4]} />
-          {returnMaterial()}
-        </mesh>
-        <group>{pads}</group>
         <Dial
           activeSwitch={activeSwitch}
           setEffectMode={setEffectMode}

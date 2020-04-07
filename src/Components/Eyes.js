@@ -27,6 +27,7 @@ const Eyes = ({ x, y, mouse, effectMode }) => {
       setTimeout(() => setShut(false), randomNumber(100, 500))
     }
     if (effectMode) {
+      clearInterval(timer.current)
       setShut(true)
       clearInterval(timer.current)
       return
