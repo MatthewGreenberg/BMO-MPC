@@ -95,7 +95,7 @@ function App() {
       <Canvas
         onMouseMove={onMouseMove}
         camera={{
-          position: [0, 0, isMobile() ? 16 : 13],
+          position: [0, 0, isMobile() ? 18 : 13],
         }}
         gl={{ antialias: true }}
         pixelRatio={window.devicePixelRatio}
