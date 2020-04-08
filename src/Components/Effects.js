@@ -9,11 +9,9 @@ import {
   EffectPass,
   RenderPass,
   SMAAEffect,
-  SSAOEffect,
   NormalPass,
   PixelationEffect,
   NoiseEffect,
-  GlitchEffect,
 } from 'postprocessing'
 
 // Fix smaa loader signature
@@ -25,10 +23,6 @@ SMAAImageLoader.prototype.load = function (_, set) {
 export default function Effects({ activeSwitch }) {
   const { gl, scene, camera, size } = useThree()
 
-  function isMobile() {
-    return size.width < 600
-  }
-
   const smaa = useLoader(SMAAImageLoader)
   const composer = useMemo(() => {
     const composer = new EffectComposer(gl)
@@ -38,26 +32,13 @@ export default function Effects({ activeSwitch }) {
     const normalPass = new NormalPass(scene, camera)
     const pixelationEffect = new PixelationEffect(5.0)
 
-    const ssaoEffect = new SSAOEffect(camera, normalPass.renderTarget.texture, {
-      blendFunction: BlendFunction.SUBTRACT,
-      samples: 15,
-      // rings: 2,
-      // distanceThreshold: 1, // Render distance depends on camera near&far.
-      // distanceFalloff: 0, // No need for falloff.
-      // rangeThreshold: 0, // Larger value works better for this camera frustum.
-      // rangeFalloff: 0.1,
-      // luminanceInfluence: 1,
-      // radius: 30,
-      scale: 0.45,
-      // bias: 0.5,
-    })
     const noiseEffect = new NoiseEffect({
       blendFunction: BlendFunction.AVERAGE,
       opacity: 0.2,
     })
     noiseEffect.blendMode.opacity.value = 0.2
 
-    let pass = [camera, ssaoEffect]
+    let pass = [camera, smaaEffect]
 
     const effectPass1 = new EffectPass(...pass)
     const effectPass2 = new EffectPass(camera, noiseEffect, pixelationEffect)

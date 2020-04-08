@@ -54,7 +54,7 @@ const Box = ({
         />
       )
     } else {
-      return <meshNormalMaterial attach="material" />
+      return <meshBasicMaterial attach="material" color="lightblue" />
     }
   }, [activeSwitch])
 

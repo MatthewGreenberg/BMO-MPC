@@ -37,14 +37,6 @@ function Dolly({ effectMode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectMode])
 
-  useEffect(() => {
-    function isMobile() {
-      return window.innerWidth < 600
-    }
-    if (isMobile()) {
-      set(16)
-    }
-  }, [])
   useFrame(({ _, camera }) => {
     if (!active) {
       return
@@ -154,7 +146,7 @@ function App() {
         <Suspense fallback={null}>
           <Effects activeSwitch={activeSwitch} />
         </Suspense>
-        <Dolly effectMode={effectMode} />
+        {!isMobile() && <Dolly effectMode={effectMode} />}
       </Canvas>
     </EffectContext.Provider>
   )

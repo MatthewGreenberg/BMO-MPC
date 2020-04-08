@@ -14,7 +14,7 @@ const Trim = ({ activeSwitch, position }) => {
     } else if (activeSwitch === 1) {
       return <meshToonMaterial shininess={5} attach="material" color="white" />
     } else {
-      return <meshNormalMaterial attach="material" />
+      return <meshBasicMaterial color="purple" attach="material" />
     }
   }
   return (

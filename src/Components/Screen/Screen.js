@@ -9,7 +9,7 @@ const Screen = ({ activeSwitch, setEffectMode, effectMode }) => {
     } else if (activeSwitch === 1) {
       return <meshToonMaterial attach="material" color="lightgray" />
     } else {
-      return <meshNormalMaterial attach="material" />
+      return <meshBasicMaterial color="white" attach="material" />
     }
   }, [activeSwitch])
   return (
