@@ -10,29 +10,30 @@ const audioFiles = {
         key: 'z',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Hat_Closed_01.wav',
-        name: 'hat',
+        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/snare2.wav',
+        name: 'snare',
+
         pitch: 'C#1',
         key: 'x',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Snare_01.wav',
-        name: 'snare',
+          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
+        name: 'gmaj7',
         pitch: 'D1',
         key: 'c',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Clap_02.wav',
-        name: 'clap',
+        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/sub-bass.wav',
+        name: 'sub bass',
         pitch: 'D#1',
         key: 'v',
       },
       {
-        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/sub-bass.wav',
-        name: 'sub bass',
+        url:
+          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Hat_Closed_01.wav',
+        name: 'hat',
+
         pitch: 'E1',
         key: 'a',
       },
@@ -44,8 +45,9 @@ const audioFiles = {
         key: 's',
       },
       {
-        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/snare2.wav',
-        name: 'snare',
+        url:
+          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_piano_chord_Asus.wav',
+        name: 'asus',
         pitch: 'F#1',
         key: 'd',
       },
@@ -58,15 +60,14 @@ const audioFiles = {
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_piano_chord_Asus.wav',
-        name: 'asus',
+          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Snare_01.wav',
+        name: 'snare',
         pitch: 'A2',
         key: 'q',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Bmin9.wav',
-        name: 'bmin9',
+        url: 'https://producertime.s3.us-east-2.amazonaws.com/rim.wav',
+        name: 'rim',
         pitch: 'A#2',
         key: 'w',
       },
@@ -78,37 +79,33 @@ const audioFiles = {
         key: 'e',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'gmaj7',
+        url: 'https://producertime.s3.us-east-2.amazonaws.com/D7%235.wav',
+        name: 'd7#5',
         pitch: 'C2',
         key: 'r',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Clap_02.wav',
+        name: 'clap',
         pitch: 'C#2',
         key: '1',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+        url: 'https://producertime.s3.us-east-2.amazonaws.com/splash.wav',
+        name: 'splash',
         pitch: 'D2',
         key: '2',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+        url: 'https://producertime.s3.us-east-2.amazonaws.com/pluck.wav',
+        name: 'gb7',
         pitch: 'D#2',
         key: '3',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+        url: 'https://producertime.s3.us-east-2.amazonaws.com/Ab7b13.wav',
+        name: 'ab7b13',
         pitch: 'E2',
         key: '4',
       },
@@ -230,111 +227,114 @@ const audioFiles = {
     sounds: [
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Kick_27.wav',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_kick_island.wav',
         name: 'kick',
         pitch: 'c1',
         key: 'z',
       },
       {
-        url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Hat_Closed_01.wav',
-        name: 'hat',
+        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/sub-bass.wav',
+        name: 'sub bass',
         pitch: 'C#1',
         key: 'x',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Snare_01.wav',
-        name: 'snare',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_carry_on_lead_1.wav',
+        name: 'lead',
         pitch: 'D1',
         key: 'c',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Clap_02.wav',
-        name: 'clap',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_i_see_thunder_lead_2.wav',
+        name: 'stab',
         pitch: 'D#1',
         key: 'v',
       },
       {
-        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/sub-bass.wav',
-        name: 'sub bass',
+        url:
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_hihat_surf.wav',
+        name: 'hat',
+
         pitch: 'E1',
         key: 'a',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/808-Hat_Open_01.wav',
-        name: 'open hat',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_shaker_surf.wav',
+        name: 'shaker',
         pitch: 'F1',
         key: 's',
       },
       {
-        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/snare2.wav',
-        name: 'snare',
+        url:
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_carry_on_lead_2.wav',
+        name: 'lead2',
         pitch: 'F#1',
         key: 'd',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_piano_chord_D7%235.wav',
-        name: 'd7',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_i_see_thunder_lead_3.wav',
+        name: 'stab2',
         pitch: 'G1',
         key: 'f',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_piano_chord_Asus.wav',
-        name: 'asus',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_clap_kingston.wav',
+        name: 'clap',
+
         pitch: 'A2',
         key: 'q',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Bmin9.wav',
-        name: 'bmin9',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_snap_carry_on.wav',
+        name: 'snap',
         pitch: 'A#2',
         key: 'w',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gb7_%239b13.wav',
-        name: 'gb7',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_carry_on_pluck_1.wav',
+        name: 'pluck',
         pitch: 'B2',
         key: 'e',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'gmaj7',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_kalimba_2.wav',
+        name: 'kalimba',
         pitch: 'C2',
         key: 'r',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+          '	https://producertime.s3.us-east-2.amazonaws.com/SS_clap_water_stone.wav',
+        name: 'clap',
         pitch: 'C#2',
         key: '1',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_snap_water_stone.wav',
+        name: 'snap2',
         pitch: 'D2',
         key: '2',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_carry_on_pluck_3.wav',
+        name: 'pluck2',
         pitch: 'D#2',
         key: '3',
       },
       {
         url:
-          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/377560/AL_rhodes_chord_Gmaj.wav',
-        name: 'kick',
+          'https://producertime.s3.us-east-2.amazonaws.com/SS_C_marimba_4.wav',
+        name: 'marimba',
         pitch: 'E2',
         key: '4',
       },

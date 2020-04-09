@@ -115,7 +115,7 @@ const Pad = ({
       url: audioFile.url,
     }).toMaster()
 
-    player.volume.value = -12
+    player.volume.value = -18
     setPlayer(player)
     function handleKeydown(e) {
       const keyName = e.key

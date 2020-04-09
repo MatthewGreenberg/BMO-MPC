@@ -12,25 +12,18 @@ const Text = ({ child, effectMode, activeSwitch }) => {
 
   const returnMaterial = useMemo(() => {
     if (activeSwitch === 0) {
-      return (
-        <a.meshToonMaterial
-          transparent={true}
-          opacity={1}
-          color="yellow"
-          attach="material"
-        />
-      )
+      return <a.meshToonMaterial color="yellow" attach="material" />
     } else if (activeSwitch === 1) {
+      return <a.meshToonMaterial color="yellow" attach="material" />
+    } else {
       return (
-        <a.meshToonMaterial
+        <meshBasicMaterial
           transparent={true}
-          opacity={1}
-          color="yellow"
+          opacity={0.9}
+          color="black"
           attach="material"
         />
       )
-    } else {
-      return <meshBasicMaterial color="white" attach="material" />
     }
   }, [activeSwitch])
 
