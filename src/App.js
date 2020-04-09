@@ -64,7 +64,7 @@ function App() {
   const [hovered, setHover] = useState(false)
   const [loading, setLoading] = useState(true)
   const [effectMode, setEffectMode] = useState(false)
-  const [activeSwitch, setActiveSwitch] = useState(2)
+  const [activeSwitch, setActiveSwitch] = useState(0)
 
   function isMobile() {
     return window.innerWidth < 600
