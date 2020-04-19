@@ -9,6 +9,7 @@ const Trim = ({ activeSwitch, position }) => {
           opacity={0.4}
           attach="material"
           color="#222"
+          shininess={100}
         />
       )
     } else if (activeSwitch === 1) {
@@ -18,7 +19,7 @@ const Trim = ({ activeSwitch, position }) => {
     }
   }
   return (
-    <mesh position={position}>
+    <mesh position={position} receiveShadow>
       <boxBufferGeometry attach="geometry" args={[10, 0.3, 0.1]} />
       {returnMaterial()}
     </mesh>

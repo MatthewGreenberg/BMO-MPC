@@ -48,7 +48,7 @@ const Box = ({
       return (
         <meshToonMaterial
           specular={new THREE.Color('white')}
-          shininess={5}
+          shininess={10}
           attach="material"
           color="white"
         />
@@ -65,9 +65,8 @@ const Box = ({
         onPointerOut={() => setHover(false)}
         rotation={animProps.rotation}
         position={box.interpolate((y) => [0, y, 0])}
-        recieveShadow
       >
-        <mesh>
+        <mesh recieveShadow>
           <boxBufferGeometry attach="geometry" args={[10, 10, 4]} />
           {returnMaterial}
         </mesh>

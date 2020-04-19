@@ -24,6 +24,7 @@ const SwitchButton = ({
       }}
       position={position}
       scale={animProps.scale}
+      recieveShadow
     >
       <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
       <a.meshToonMaterial attach="material" color={animProps.color} />

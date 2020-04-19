@@ -13,7 +13,7 @@ const Controls = ({ effectMode }) => {
 
   return (
     <orbitControls
-      enableZoom={false}
+      // enableZoom={false}
       enablePan={false}
       ref={orbitRef}
       args={[camera, gl.domElement]}

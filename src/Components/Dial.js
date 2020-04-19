@@ -3,9 +3,9 @@ import React, { useMemo } from 'react'
 const Dial = ({ activeSwitch, setEffectMode, effectMode }) => {
   const returnMaterial = useMemo(() => {
     if (activeSwitch === 0) {
-      return <meshPhongMaterial attach="material" color="red" />
+      return <meshPhongMaterial attach="material" color="red" shininess={100} />
     } else if (activeSwitch === 1) {
-      return <meshPhongMaterial attach="material" color="red" />
+      return <meshBasicMaterial attach="material" color="red" />
     } else {
       return <meshNormalMaterial attach="material" />
     }

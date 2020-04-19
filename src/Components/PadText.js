@@ -37,6 +37,7 @@ const PadText = ({ child, x, y, active }) => {
         opacity={0.5}
         color="purple"
         attach="material"
+        shininess={100}
       />
     </a.mesh>
   )

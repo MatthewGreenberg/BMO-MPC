@@ -14,7 +14,8 @@ import Loading from './Components/Loading'
 import { useSpring, a } from 'react-spring/three'
 import { EffectContext } from './EffectContext'
 import Effects from './Components/Effects'
-
+import * as THREE from 'three'
+import Social from './Components/Social'
 function usePrevious(value) {
   const ref = useRef()
   useEffect(() => {
@@ -91,40 +92,33 @@ function App() {
   return (
     <EffectContext.Provider>
       {loading && <Loading />}
-
+      <Social />
       <Canvas
+        shadowMap
         onMouseMove={onMouseMove}
         camera={{
           position: [0, 0, isMobile() ? 16 : 13],
         }}
-        gl={{ antialias: true }}
         pixelRatio={window.devicePixelRatio}
       >
         <Controls effectMode={effectMode} />
         <a.spotLight
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
           penumbra={1}
-          castShadow
           angle={animProps.angle}
           intensity={0.5}
           position={[4, 10, 5]}
         />
         <spotLight
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
           penumbra={1}
-          castShadow
           intensity={0.25}
           position={[-10, 10, 3]}
           color="blue"
         />
         <pointLight
           penumbra={1}
-          castShadow
           intensity={0.25}
           color="orange"
-          position={[3, 0, 5]}
+          position={[3, 1, 5]}
         />
         <pointLight
           penumbra={1}
@@ -142,7 +136,6 @@ function App() {
           setEffectMode={setEffectMode}
           effectMode={effectMode}
         />
-
         <Suspense fallback={null}>
           <Effects activeSwitch={activeSwitch} />
         </Suspense>

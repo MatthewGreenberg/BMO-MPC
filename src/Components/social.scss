@@ -1,0 +1,18 @@
+.social {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  bottom: 2%;
+  left: 10%;
+
+  svg {
+    margin-right: 3em;
+    path {
+      transition: fill 0.25s;
+      fill: 'orange';
+      &:hover {
+        fill: 'red';
+      }
+    }
+  }
+}

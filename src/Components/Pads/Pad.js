@@ -37,9 +37,23 @@ const Pad = ({
 
   const returnMaterial = useMemo(() => {
     if (activeSwitch === 0) {
-      return <a.meshPhongMaterial attach="material" color={animProps.color} />
+      return (
+        <a.meshPhongMaterial
+          emissive="#222"
+          attach="material"
+          color={animProps.color}
+          emissiveintensity={100}
+          shininess={100}
+        />
+      )
     } else if (activeSwitch === 1) {
-      return <a.meshPhongMaterial attach="material" color={animProps.color} />
+      return (
+        <a.meshPhongMaterial
+          emissive="#888"
+          attach="material"
+          color={animProps.color}
+        />
+      )
     } else {
       return <meshNormalMaterial attach="material" />
     }
@@ -53,6 +67,7 @@ const Pad = ({
           opacity={0.75}
           attach="material"
           color={animProps.planeColor}
+          shininess={100}
         />
       )
     } else if (activeSwitch === 1) {
