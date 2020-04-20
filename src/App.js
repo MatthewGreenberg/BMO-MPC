@@ -107,12 +107,14 @@ function App() {
           angle={animProps.angle}
           intensity={0.5}
           position={[4, 10, 5]}
+          castShadow
         />
         <spotLight
           penumbra={1}
           intensity={0.25}
           position={[-10, 10, 3]}
           color="blue"
+          castShadow
         />
         <pointLight
           penumbra={1}
@@ -122,7 +124,6 @@ function App() {
         />
         <pointLight
           penumbra={1}
-          castShadow
           intensity={0.35}
           color="orange"
           position={[-3, -1, 5]}
